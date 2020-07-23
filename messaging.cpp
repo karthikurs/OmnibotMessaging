@@ -53,21 +53,19 @@ bool Messaging::generateMessage(Message* msg_buf, nu2pi &nu2pi_msg) {
 	msg_buf->msgType = NU2PI;
 	msg_buf->msgLenBytes = sizeof(nu2pi_msg);
 	uint8_t* data = (uint8_t*)(&nu2pi_msg);
-	for (int i = 0; i < msg_buf->msgLenBytes; ++i) {
-		msg_buf->msgData[i] = data[i];
-	}
+	memcpy(msg_buf->msgData, data, msg_buf->msgLenBytes);
 	msg_buf->msgHash = DJBHash((msg_buf->msgData), msg_buf->msgLenBytes);
 	return true;
 }
 
 // TODO: Code duplication!!
-bool Messaging::generateMessage(Message* msg_buf, pi2nu &pi2nu_msg) {
-	msg_buf->msgType = PI2NU;
-	msg_buf->msgLenBytes = sizeof(pi2nu_msg);
-	uint8_t* data = (uint8_t*)(&pi2nu_msg);
-	for (int i = 0; i < msg_buf->msgLenBytes; ++i) {
-		msg_buf->msgData[i] = data[i];
-	}
+bool Messaging::generateMessage(Message* msg_buf,
+                                void* constructed_msg
+																messageTypeIdentifier msgType_ID) {
+	msg_buf->msgType = msgType_ID;
+	msg_buf->msgLenBytes = sizeof(velocityCmd_msg);
+	uint8_t* data = (uint8_t*)(&velocityCmd_msg);
+	memcpy(msg_buf->msgData, data, msg_buf->msgLenBytes);
 	msg_buf->msgHash = DJBHash((msg_buf->msgData), msg_buf->msgLenBytes);
 	return true;
 }
@@ -75,6 +73,12 @@ bool Messaging::generateMessage(Message* msg_buf, pi2nu &pi2nu_msg) {
 bool Messaging::txMessage(Message* msg_buf) {
 	txMessage_(msg_buf);
 	return true;
+}
+
+void messageSize_(messageTypeIdentifier msgType_ID) {
+	switch (msgType_ID) {
+		case NULLMSG:
+	}
 }
 
 //http://www.partow.net/programming/hashfunctions/index.html

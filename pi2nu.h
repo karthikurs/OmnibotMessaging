@@ -20,7 +20,7 @@ struct manualCmd {
 	float cmd_a;
 	float cmd_b;
 	float cmd_c;
-}
+};
 
 // check on connection status
 struct heartbeat {
@@ -46,10 +46,11 @@ struct globalPID{
 };
 
 struct singlePID{
-	int8_t motorID;
 	float pGain;
 	float iGain;
 	float dGain;
+	int8_t motorID;
+	int8_t dummy[3];
 };
 
 #endif
