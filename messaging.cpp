@@ -66,13 +66,14 @@ bool Messaging::txMessage(Message* msg_buf) {
 
 uint8_t Messaging::messageSize_(messageTypeIdentifier msgType_ID) {
 	switch (msgType_ID) {
-		case NULLMSG:      return 0;
-		case VELOCITY_CMD: return 4;
-		case MANUAL_CMD:   return 12;
-		case HEARTBEAT:    return 1;
-		case MOTOR_REMAP:  return 3;
-		case GLOBAL_PID:   return 12;
-		case SINGLE_PID:   return 16;
+		case NULLMSG:               return 0;
+		case VELOCITY_CMD:          return 4;
+		case MANUAL_CMD:            return 12;
+		case HEARTBEAT:             return 1;
+		case MOTOR_REMAP:           return 3;
+		case GLOBAL_PID:            return 12;
+		case SINGLE_PID:            return 16;
+		case NUCLEO_GENERAL_UPDATE: return 56;
 	}
 	return 0;
 }

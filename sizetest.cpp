@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "pi2nu.h"
-#include "nu2pi.h"
+#include "pi2nu.hpp"
+#include "nu2pi.hpp"
 
 int main() {
 	velocityCmd velocityCmd_msg;
@@ -16,6 +16,8 @@ int main() {
 	std::cout << sizeof(globalPID_msg) << std::endl;
 	singlePID singlePID_msg;
 	std::cout << sizeof(singlePID_msg) << std::endl;
+	nucleoGeneralUpdate nucleoGeneralUpdate_msg;
+	std::cout << sizeof(nucleoGeneralUpdate_msg) << std::endl;
 
 	return 0;
 }
