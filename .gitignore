@@ -1,3 +1,7 @@
 !*.cpp
 !*.hpp
 !*.h
+sizetest.cpp
+*.o
+*.a
+*.gch
