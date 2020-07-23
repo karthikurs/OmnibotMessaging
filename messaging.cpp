@@ -29,7 +29,7 @@ bool Messaging::rxMessageSequence(uint8_t* const serial_data) {
 
 // will return if the msg is valid and store it in rxLastMessage_
 bool Messaging::parseMessage(uint8_t* serial_data) {
-	if (serial_data[0] > 0x06) return false;
+	if (serial_data[0] > 0x07) return false;
 	Message* temp = (Message*)(serial_data);
 	if(!checkMessageHash(temp)) return false;
 	rxLastMessage_ = *temp;
@@ -49,7 +49,7 @@ bool Messaging::checkMessageHash(Message* msg) {
 
 // the struct yourself first
 bool Messaging::generateMessage(Message* msg_buf,
-                                void* constructed_msg
+                                void* constructed_msg,
                                 messageTypeIdentifier msgType_ID) {
 	msg_buf->msgType = msgType_ID;
 	msg_buf->msgLenBytes = messageSize_(msgType_ID);

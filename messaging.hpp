@@ -13,6 +13,7 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <cstring>
 
 class Messaging {
 	public:
@@ -25,7 +26,7 @@ class Messaging {
 			STATE_TRANSITION      = 0x04,
 			MOTOR_REMAP           = 0x05,
 			GLOBAL_PID            = 0x06,
-			SINGLE_PID            = 0x06
+			SINGLE_PID            = 0x07
 		};
 
 		enum messagingError_t : uint8_t {
@@ -56,7 +57,7 @@ class Messaging {
 
 		// to be used if you did make the struct yourself
 		bool generateMessage(Message* msg_buf,
-                         void* constructed_msg
+                         void* constructed_msg,
                          messageTypeIdentifier msgType_ID);
 
 		bool txMessage(Message* msg_buf);
