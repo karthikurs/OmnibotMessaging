@@ -8,14 +8,14 @@
 #include "messaging.hpp"
 
 Messaging::Messaging() {
-	sendMessage_ = nullptr;
-	messageReaction_ = nullptr;
+	txMessage_ = nullptr;
+	rxCallback_ = nullptr;
 }
 
-Messaging::Messaging(void (*sendMessage_fcn)(Message* msg_buf),
-                     void (*messageReaction_fcn)(Message &msg)) :
-										 sendMessage_(sendMessage_fcn),
-										 messageReaction_(messageReaction_fcn) { 
+Messaging::Messaging(void (*txMessage_fcn)(Message* msg_buf),
+                     void (*rxCallback_fcn)(Message &msg)) :
+										 txMessage_(txMessage_fcn),
+										 rxCallback_(rxCallback_fcn) { 
 	rxLastMessage_.msgType = NULLMSG;
 	txLastMessage_.msgType = NULLMSG;
 }
@@ -38,7 +38,7 @@ bool Messaging::parseMessage(uint8_t* serial_data) {
 
 // react to lastMessage_
 bool Messaging::reactMessage() {
-	messageReaction_(rxLastMessage_);
+	rxCallback_(rxLastMessage_);
 	return true;
 }
 
@@ -72,8 +72,8 @@ bool Messaging::generateMessage(Message* msg_buf, pi2nu &pi2nu_msg) {
 	return true;
 }
 
-bool Messaging::sendMessage(Message* msg_buf) {
-	sendMessage_(msg_buf);
+bool Messaging::txMessage(Message* msg_buf) {
+	txMessage_(msg_buf);
 	return true;
 }
 

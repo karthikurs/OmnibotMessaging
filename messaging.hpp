@@ -18,9 +18,14 @@ class Messaging {
 	public:
 		// for message distinction
 		enum messageTypeIdentifier : uint8_t {
-			NULLMSG = 0x00,
-			NU2PI = 0x01,
-			PI2NU = 0x02
+			NULLMSG               = 0x00,
+			VELOCITY_CMD          = 0x01,
+			MANUAL_CMD            = 0x02,
+			HEARTBEAT             = 0x03,
+			STATE_TRANSITION      = 0x04,
+			MOTOR_REMAP           = 0x05,
+			GLOBAL_PID            = 0x06,
+			SINGLE_PID            = 0x06
 		};
 
 		enum messagingError_t : uint8_t {
@@ -36,8 +41,8 @@ class Messaging {
 
 		Messaging();
 
-		Messaging(void (*sendMessage_fcn)(Message* msg_buf),
-		          void (*messageReaction_fcn)(Message &msg));
+		Messaging(void (*txMessage_fcn)(Message* msg_buf),
+		          void (*rxCallback_fcn)(Message &msg));
 
 		bool rxMessageSequence(uint8_t* serial_data);
 
@@ -54,15 +59,15 @@ class Messaging {
 		bool generateMessage(Message* msg_buf, nu2pi &nu2pi_msg);
 		bool generateMessage(Message* msg_buf, pi2nu &pi2nu_msg);
 
-		bool sendMessage(Message* msg_buf);
+		bool txMessage(Message* msg_buf);
 	private:
 		Message rxLastMessage_;
 		Message txLastMessage_;
-		// function pointer to send message with
-		void (*sendMessage_)(Message* msg_buf);
+		// function pointer to tx message with
+		void (*txMessage_)(Message* msg_buf);
 
 		// function poiner to message reaction
-		void (*messageReaction_)(Message &msg);
+		void (*rxCallback_)(Message &msg);
 		// hash function for error checking
 		uint16_t DJBHash(const uint8_t* msg_data, uint8_t length);
 
