@@ -8,8 +8,8 @@
 #ifndef INC_MESSAGING_HPP_
 #define INC_MESSAGING_HPP_
 
-#include "nu2pi.h"
-#include "pi2nu.h"
+#include "nu2pi.hpp"
+#include "pi2nu.hpp"
 
 #include <stdint.h>
 #include <stdlib.h>
