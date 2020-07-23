@@ -55,16 +55,16 @@ class Messaging {
 		bool checkMessageHash(Message* msg);
 
 		// to be used if you did make the struct yourself
-		// needs overloaded protos for each msg
-		bool generateMessage(Message* msg_buf, nu2pi &nu2pi_msg);
-		bool generateMessage(Message* msg_buf, velocityCmd &velocityCmd_msg);
+		bool generateMessage(Message* msg_buf,
+                         void* constructed_msg
+                         messageTypeIdentifier msgType_ID);
 
 		bool txMessage(Message* msg_buf);
 	private:
 		Message rxLastMessage_;
 		Message txLastMessage_;
 
-		void messageSize_(messageTypeIdentifier);
+		uint8_t messageSize_(messageTypeIdentifier);
 
 		// function pointer to tx message with
 		void (*txMessage_)(Message* msg_buf);
