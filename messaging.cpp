@@ -29,7 +29,7 @@ bool Messaging::rxMessageSequence(uint8_t* const serial_data) {
 
 // will return if the msg is valid and store it in rxLastMessage_
 bool Messaging::parseMessage(uint8_t* serial_data) {
-	if (serial_data[0] > 0x07) return false;
+	if (serial_data[0] > 0x08) return false;
 	Message* temp = (Message*)(serial_data);
 	if(!checkMessageHash(temp)) return false;
 	rxLastMessage_ = *temp;

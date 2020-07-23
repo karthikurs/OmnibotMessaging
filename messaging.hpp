@@ -26,7 +26,8 @@ class Messaging {
 			STATE_TRANSITION      = 0x04,
 			MOTOR_REMAP           = 0x05,
 			GLOBAL_PID            = 0x06,
-			SINGLE_PID            = 0x07
+			SINGLE_PID            = 0x07,
+			NUCLEO_GENERAL_UPDATE = 0x08
 		};
 
 		enum messagingError_t : uint8_t {

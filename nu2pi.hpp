@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-struct nu2pi{
+struct nucleoGeneralUpdate{
     // a_delta, b_delta, c_delta represent encoder tick change.
     int8_t a_delta;
     int8_t b_delta;
